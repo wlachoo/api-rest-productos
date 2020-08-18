@@ -12,7 +12,7 @@ const UserSchema = new Schema({
   lastLogin: Date
 })
 
-UserSchema.pre('save', (next) => {
+/*UserSchema.pre('save', (next) => {
   let user = this
   //if (!user.isModified('password')) return next()
 
@@ -26,7 +26,7 @@ UserSchema.pre('save', (next) => {
       next()
     })
   })
-})
+})*/
 
 UserSchema.methods.gravatar = () => {
   if (!this.email) return `https://gravatar.com/avatar/?s=200&d=retro`

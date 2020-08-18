@@ -6,7 +6,7 @@ let signUp = (req, res) => {
   const user = new User({ 
     email: req.body.email,
     displayName: req.body.displayName,
-    password: req.body.password,
+    password: bcrypt.hashSync(req.body.password, 10),
   })
  
   user.save((err) => {
@@ -25,7 +25,7 @@ let signIn = (req, res) => {
     if (err) return res.status(500).send({ message: err })
     if (!user) return res.status(404).send({ message: 'No existe el usuario' })
     
-    if (body.password != user.password) {
+    if (!bcrypt.compareSync(body.password, user.password)) {
       return res.status(400).json({
           ok: false,
           err: {

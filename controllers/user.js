@@ -25,7 +25,7 @@ let signIn = (req, res) => {
     if (err) return res.status(500).send({ message: err })
     if (!user) return res.status(404).send({ message: 'No existe el usuario' })
     
-    if (!bcrypt.compareSync(body.password, user.password)) {
+    if (body.password != user.password) {
       return res.status(400).json({
           ok: false,
           err: {
